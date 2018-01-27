@@ -1,0 +1,4 @@
+class Discussion < ApplicationRecord
+	belongs_to :project
+	belongs_to :user
+end

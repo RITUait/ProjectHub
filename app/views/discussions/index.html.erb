@@ -1,0 +1,29 @@
+<%- model_class = Discussion -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:comment) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @discussions.each do |discussion| %>
+      <tr>
+        <td><%= link_to discussion.id, user_project_discussion_path(@user.id,@project.id,discussion.id) %></td>
+        <td><%= discussion.comment %></td>
+       
+        <td><%=l discussion.created_at %></td>
+       
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_user_project_discussion_path(@user.id,@project.id),
+            :class => 'btn btn-primary' %>
+            <%= link_to "Back to projects",user_projects_path(@user.id,@project.id), :class => 'btn btn-default'%>
